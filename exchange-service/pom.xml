@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nttdata.bc39.grupo04.wallet</groupId>
-    <artifactId>wallet-service</artifactId>
+    <artifactId>exchange-service</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

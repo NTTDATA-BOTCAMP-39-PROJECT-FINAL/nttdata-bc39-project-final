@@ -15,6 +15,8 @@
 		<module>eureka-server</module>
 		<module>composite-service</module>
 		<module>wallet-service</module>
+		<module>bootcoin-service</module>
+		<module>exchange-service</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

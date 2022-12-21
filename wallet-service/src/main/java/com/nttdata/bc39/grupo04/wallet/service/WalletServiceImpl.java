@@ -16,12 +16,14 @@ import java.util.Objects;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.nttdata.bc39.grupo04.api.exceptions.BadRequestException;
 import com.nttdata.bc39.grupo04.api.exceptions.InvaliteInputException;
 import com.nttdata.bc39.grupo04.api.exceptions.NotFoundException;
+import com.nttdata.bc39.grupo04.api.kafka.Event;
 import com.nttdata.bc39.grupo04.api.utils.Constants;
 import com.nttdata.bc39.grupo04.api.wallet.WalletDTO;
 import com.nttdata.bc39.grupo04.api.wallet.WalletService;
@@ -43,6 +45,9 @@ public class WalletServiceImpl implements WalletService {
 		this.repository = repository;
 		this.mapper = mapper;
 	}
+	
+	@Autowired
+	private KafkaTemplate<String, Event<?>> producer;
 
 	@Override
 	public Flux<WalletDTO> getAllWallets() {

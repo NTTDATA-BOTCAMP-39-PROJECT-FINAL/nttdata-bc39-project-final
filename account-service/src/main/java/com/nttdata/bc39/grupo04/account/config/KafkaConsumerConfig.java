@@ -18,7 +18,7 @@ import java.util.Map;
 @Configuration
 @EnableKafka
 public class KafkaConsumerConfig {
-    private static final String bootstrapAddress = "kafka:9092";
+    private static final String bootstrapAddress = "localhost:9092";
 
     @SuppressWarnings("all")
     @Bean
