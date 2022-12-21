@@ -26,12 +26,6 @@ public class ExchangeRestController {
 		return service.getAllExchanges();
 	}
 
-	/*
-	 * @GetMapping(value = "/findByDate/{date}") public Mono<ExchangeDTO>
-	 * getExchangeByDate(@PathVariable(value = "date") String date) { return
-	 * service.getExchangeByDate(date); }
-	 */
-
 	@PostMapping(value = "/save")
 	public Mono<ExchangeDTO> createExchange(@RequestBody ExchangeDTO body) {
 		return service.createExchange(body);
@@ -41,11 +35,5 @@ public class ExchangeRestController {
 	public Mono<ExchangeDTO> updateExchange(@RequestBody ExchangeDTO body) {
 		return service.updateExchange(body);
 	}
-
-	/*
-	 * @DeleteMapping(value = "/delete/{date}") public Mono<Void>
-	 * deleteExchangeByDate(@PathVariable(value = "date") String date) { return
-	 * service.deleteExchangeByDate(date); }
-	 */
 
 }

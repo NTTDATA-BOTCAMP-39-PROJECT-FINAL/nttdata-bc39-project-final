@@ -1,13 +1,18 @@
 package com.nttdata.bc39.grupo04.exchange.service;
 
+import java.time.LocalDate;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import com.nttdata.bc39.grupo04.api.exceptions.InvaliteInputException;
 import com.nttdata.bc39.grupo04.api.exchange.ExchangeDTO;
 import com.nttdata.bc39.grupo04.api.exchange.ExchangeService;
 import com.nttdata.bc39.grupo04.api.kafka.Event;
+import com.nttdata.bc39.grupo04.exchange.persistence.ExchangeEntity;
 import com.nttdata.bc39.grupo04.exchange.persistence.ExchangeRepository;
 
 import reactor.core.publisher.Flux;
@@ -36,13 +41,18 @@ public class ExchangeServiceImpl implements ExchangeService {
 
 	@Override
 	public Mono<ExchangeDTO> createExchange(ExchangeDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Mono<ExchangeEntity> entity = repository.findByCreateDate(dto.getCreateDate());
+		ExchangeEntity entityNew = entity.block();
+		if (!ObjectUtils.isEmpty(entityNew)) {
+			throw new InvaliteInputException("Error, Este usuario tiene un monedero registrado");
+		}
+		dto.setCreateDate(LocalDate.now());
+		entityNew = mapper.dtoToEntity(dto);
+		return repository.save(entityNew).map(mapper::entityToDto);
 	}
 
 	@Override
 	public Mono<ExchangeDTO> updateExchange(ExchangeDTO dto) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
