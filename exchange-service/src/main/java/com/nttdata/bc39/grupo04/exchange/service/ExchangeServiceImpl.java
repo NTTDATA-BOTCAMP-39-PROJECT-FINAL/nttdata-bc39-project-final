@@ -44,7 +44,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 		Mono<ExchangeEntity> entity = repository.findByCreateDate(dto.getCreateDate());
 		ExchangeEntity entityNew = entity.block();
 		if (!ObjectUtils.isEmpty(entityNew)) {
-			throw new InvaliteInputException("Error, Este usuario tiene un monedero registrado");
+			throw new InvaliteInputException("Error, Este tipo de cambio ya esta registrado en la fecha solicitada");
 		}
 		dto.setCreateDate(LocalDate.now());
 		entityNew = mapper.dtoToEntity(dto);
